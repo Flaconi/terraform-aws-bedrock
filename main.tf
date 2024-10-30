@@ -17,7 +17,7 @@ resource "aws_bedrock_custom_model" "this" {
   }
 
   dynamic "validation_data_config" {
-    for_each = var.training_data_s3_uri != null ? ["this"] : []
+    for_each = var.validation_data_s3_uri != null ? ["this"] : []
     content {
       validator {
         s3_uri = var.validation_data_s3_uri
