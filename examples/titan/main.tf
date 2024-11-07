@@ -64,11 +64,16 @@ resource "aws_s3_object" "data" {
   source = "train.jsonl"
 }
 
+resource "random_string" "this" {
+  length  = 16
+  special = false
+}
+
 module "model" {
   source = "../../"
 
   name                = "titan"
-  job_name            = "titan-job-1"
+  job_name            = "titan-job-${random_string.this.result}"
   foundation_model_id = "amazon.titan-text-express-v1"
   model_role_arn      = aws_iam_role.this.arn
 
